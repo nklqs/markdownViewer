@@ -1,5 +1,3 @@
 <template>
-  <div>
-    <Markdown-Viewer/>
-  </div>
+    <NuxtPage />
 </template>
