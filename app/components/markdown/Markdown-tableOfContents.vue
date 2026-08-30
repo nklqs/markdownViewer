@@ -9,9 +9,10 @@ const props = defineProps({
     required: true
   }
 })
+
+
 const tocData = ref()
 
-console.log(props.rawContent)
 async function tocRefresh(rawContent: string) {
   try {
     const result = await parseMarkdown(rawContent, {
@@ -19,11 +20,11 @@ async function tocRefresh(rawContent: string) {
     })
 
     tocData.value = result.meta.toc
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error)
   }
 }
+
 await tocRefresh(props.rawContent)
 </script>
 
@@ -62,6 +63,7 @@ await tocRefresh(props.rawContent)
   width: 100%;
   scroll-behavior: smooth;
 }
+
 .toc-layout {
   display: flex;
   overflow-y: auto;
@@ -73,6 +75,13 @@ await tocRefresh(props.rawContent)
   a.router-link-active {
     color: black;
     text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .markdown-toc {
+    margin: 0;
+    padding: 0.5rem;
   }
 }
 </style>

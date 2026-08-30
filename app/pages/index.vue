@@ -9,6 +9,7 @@ import Header from "~/layouts/Header.vue";
   <div>
     <MarkdownContainer/>
   </div>
+  <DialogContainer/>
 </template>
 
 <style scoped>
@@ -17,6 +18,7 @@ import Header from "~/layouts/Header.vue";
   align-items: center;
   justify-content: center;
   height: 5rem;
+  margin: 0 1rem 0 1rem
 }
 
 .responsive {
