@@ -1,4 +1,6 @@
-export default defineNuxtRouteMiddleware((to) => {
+import {mapContent} from "#imports";
+
+export default defineNuxtRouteMiddleware(async (to) => {
     const readOnlyParam = to.query.readOnlyMode as string | undefined;
     const gitHubGistParam = to.query.gist as string | undefined;
     const disableControls = to.query.disableControls as string | undefined;
@@ -10,6 +12,7 @@ export default defineNuxtRouteMiddleware((to) => {
     }
     if (gitHubGistParam) {
         settings.value.gitGistAddress = gitHubGistParam
+        await mapContent()
     }
     if(disableControls) {
         settings.value.disableControls = disableControls === 'true';
