@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Header from "~/layouts/Header.vue";
+import DrawerComponent from "~/components/DrawerComponent.vue";
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import Header from "~/layouts/Header.vue";
     <MarkdownContainer/>
   </div>
   <DialogContainer/>
+  <DrawerComponent />
 </template>
 
 <style scoped>

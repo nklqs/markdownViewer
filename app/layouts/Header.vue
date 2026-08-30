@@ -3,6 +3,7 @@ import Download from '@primeicons/vue/download';
 import WavePulse from '@primeicons/vue/wave-pulse';
 import Lock from '@primeicons/vue/lock';
 import {ref} from 'vue';
+import Plus from '@primeicons/vue/plus';
 
 const settings = useAppSettings()
 const dialogs = useDialogs()
@@ -47,6 +48,9 @@ function loadGist() {
 function toggleOnDemandRendering() {
   settings.value.onDemandRendering = !settings.value.onDemandRendering;
 }
+const toggleDrawer = () => {
+  settings.value.drawerVisible = !settings.value.drawerVisible;
+}
 
 </script>
 
@@ -56,6 +60,9 @@ function toggleOnDemandRendering() {
       <NuxtImg src="/logo.png" class="responsive" style="max-height: 3rem; width: auto; object-fit: contain"/>
     </div>
     <div class="header-menu">
+      <Button @click="toggleDrawer()" iconOnly>
+        <Plus />
+      </Button>
       <Menu ref="menu" :model="items" popup class="w-40"/>
       <Button type="button" severity="secondary" variant="outlined" @click="toggle">Settings</Button>
     </div>

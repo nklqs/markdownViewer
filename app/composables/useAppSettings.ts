@@ -6,6 +6,7 @@ export interface AppSettings {
     gitGistAddress: string | undefined;
     disableControls: boolean;
     hasMultipleFiles: boolean;
+    drawerVisible: boolean
 }
 
 export const useAppSettings = () => {
@@ -17,5 +18,6 @@ export const useAppSettings = () => {
         gitGistAddress: undefined,
         disableControls: false,
         hasMultipleFiles: false,
+        drawerVisible: false,
     }));
 };
