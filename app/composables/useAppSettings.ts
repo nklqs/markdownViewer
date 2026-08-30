@@ -5,6 +5,7 @@ export interface AppSettings {
     onDemandRendering: boolean;
     gitGistAddress: string | undefined;
     disableControls: boolean;
+    hasMultipleFiles: boolean;
 }
 
 export const useAppSettings = () => {
@@ -15,5 +16,6 @@ export const useAppSettings = () => {
         onDemandRendering: false,
         gitGistAddress: undefined,
         disableControls: false,
+        hasMultipleFiles: false,
     }));
 };

@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import {mapContent} from "~/utils/mapContent.ts";
+import Check from '@primeicons/vue/check';
+import Spinner from '@primeicons/vue/spinner';
 
-const props = defineProps({
-  content: {
-    type: String,
-    required: false,
-  }
-})
 const settings = useAppSettings()
-const {activeDialog, dialogPayload, closeDialog} = useDialogs()
-
+const {activeDialog, closeDialog} = useDialogs()
+const loading = ref(false)
 const visible = computed({
   get: () => activeDialog.value === 'LOAD_GIST_DIALOG',
   set: (val) => {
@@ -19,8 +15,9 @@ const visible = computed({
 
 
 async function loadGist() {
+  loading.value = true
   await mapContent()
-
+  loading.value = false
   closeDialog()
 }
 </script>
@@ -34,8 +31,12 @@ async function loadGist() {
       </div>
     </div>
     <template #footer>
-      <Button severity="secondary" variant="outlined" @click="closeDialog()">Cancel</Button>
-      <Button severity="secondary" variant="outlined" @click="loadGist()">Load</Button>
+      <Button severity="secondary" variant="outlined" :disabled="loading" @click="closeDialog()">Cancel</Button>
+      <Button severity="secondary" variant="outlined" :disabled="loading" @click="loadGist()">
+        <Spinner v-if="loading" class="animate-spin" />
+        <Check v-else />
+        {{loading ? 'Loading...' : 'Load Gist'}}
+      </Button>
     </template>
   </Dialog>
 </template>

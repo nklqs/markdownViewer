@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import breaks from 'comark/plugins/breaks'
+import jsonRender from '@comark/vue/plugins/json-render'
+
 
 const props = defineProps({
   rawContent: {
@@ -37,6 +39,7 @@ async function customContentProcessor() {
       /(^|\s)#([\wÀ-ÿ]+)/g,
       '$1<span class="custom-tag">#$2</span>'
   );
+  rawContentPs = rawContentPs.replace(/^(\s*\{[\s\S]*?})/g, '<pre>$1</pre>')
   return rawContentPs.replace(/==([^=\n]+)==/g, '<mark>$1</mark>')
 }
 
@@ -50,7 +53,7 @@ async function updateContent() {
     <div class="markdown-content-container">
       <Button v-if="settings.onDemandRendering" @click="updateContent()">Refresh</Button>
       <Suspense>
-        <Markdown :plugins="[breaks()]" style="width: 100%">{{ content }}</Markdown>
+        <Markdown :plugins="[breaks(), jsonRender()]" style="width: 100%">{{ content }}</Markdown>
       </Suspense>
     </div>
 
@@ -98,7 +101,7 @@ async function updateContent() {
   border-left: 3px solid #8436f4;
   background-color: #e7ccff;
 }
-:deep(code) {
+:deep(pre) {
   background-color: #dcdcdc;
   border-radius: 3px;
   padding: 2px 4px;
@@ -107,7 +110,7 @@ async function updateContent() {
   background-color: #d9d1ff;
   color: #6c22da;
   border-radius: 1rem;
-  padding: 0px 3px;
+  padding: 0 3px;
   border: #6c22da solid 1px;
 }
 

@@ -19,7 +19,7 @@ export interface owner {
 export const useContent = () => {
     const files = useState<Record<string, GistFile | null>>("markdown-content", () => ({}));
     let currentFile = useState<GistFile>("file-content", () => ({
-        content: "",
+        content: "# Hello, world!",
         filename: "example",
         language: "english",
         raw_url: "",
@@ -40,13 +40,10 @@ export const useContent = () => {
             currentFile.value.content = newContent;
         }
     }
-    //TODO: Make it work correct
-    const deleteMarkdown = (filename: string) => {
-        let targetFile = files.value[filename]
 
-        targetFile = null
+    const returnAmountOfFiles = () => {
+        return Number(Object.keys(files).length.valueOf())
     }
-
     const returnFiles = () => {
         return files
     }
@@ -55,6 +52,7 @@ export const useContent = () => {
         updateContent,
         returnFiles,
         setCurrentFile,
+        returnAmountOfFiles,
         currentFile,
         files
     }
