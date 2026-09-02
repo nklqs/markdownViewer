@@ -11,13 +11,13 @@ export const mapContent = async () => {
         return false
     }
 
-    if (response.files) content.files.value = response.files
+    if (response.files) content.files.value = Object.values(response.files)
 
     if (content.returnAmountOfFiles() > 1) {
         settings.value.hasMultipleFiles = true
     }
 
-    const firstElement = Object.values(content.files.value)[0]
+    const firstElement = content.files.value[0]
 
     if (firstElement?.filename) content.setCurrentFile(firstElement?.filename)
 

@@ -17,7 +17,7 @@ export interface owner {
 }
 
 export const useContent = () => {
-    const files = useState<Record<string, GistFile | null>>("markdown-content", () => ({}));
+    const files = useState<GistFile[]>("markdown-content", () => []);
     let currentFile = useState<GistFile>("file-content", () => ({
         content: "# Hello, world!",
         filename: "example",
@@ -28,7 +28,7 @@ export const useContent = () => {
     }));
 
     const setCurrentFile = (filename: string) => {
-        const targetFile = files.value[filename]
+        const targetFile = files.value.find((file) => file.filename === filename);
         if (targetFile) {
             currentFile.value = targetFile
         }
