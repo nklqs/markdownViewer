@@ -48,7 +48,7 @@ export interface ForkOfGist {
     description: string | null;
     comments: number;
     user: SimpleUser | null;
-    files: Record<string, GistFile>;
+    files: GistFile[];
     created_at: string;
     updated_at: string;
     comments_enabled?: boolean;

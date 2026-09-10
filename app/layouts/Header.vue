@@ -3,7 +3,7 @@ import Download from '@primeicons/vue/download';
 import WavePulse from '@primeicons/vue/wave-pulse';
 import Lock from '@primeicons/vue/lock';
 import {ref} from 'vue';
-import Plus from '@primeicons/vue/plus';
+import Bars from '@primeicons/vue/bars';
 
 const settings = useAppSettings()
 const dialogs = useDialogs()
@@ -61,7 +61,7 @@ const toggleDrawer = () => {
     </div>
     <div class="header-menu">
       <Button @click="toggleDrawer()" iconOnly>
-        <Plus />
+        <Bars/>
       </Button>
       <Menu ref="menu" :model="items" popup class="w-40"/>
       <Button type="button" severity="secondary" variant="outlined" @click="toggle">Settings</Button>

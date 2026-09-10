@@ -12,6 +12,8 @@ export const mapContent = async () => {
     }
 
     if (response.files) content.files.value = Object.values(response.files)
+    if(response.owner) content.setUser = response.owner
+
 
     if (content.returnAmountOfFiles() > 1) {
         settings.value.hasMultipleFiles = true

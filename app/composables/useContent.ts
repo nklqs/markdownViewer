@@ -1,4 +1,4 @@
-import type {GistFile} from "~/interfaces/GetAGist.ts";
+import type {GetAGist, GistFile, SimpleUser} from "~/interfaces/GetAGist.ts";
 
 export interface FileItem {
     filename: string;
@@ -18,10 +18,11 @@ export interface owner {
 
 export const useContent = () => {
     const files = useState<GistFile[]>("markdown-content", () => []);
+    const user = useState<SimpleUser | null>("markdown-content", () => null);
     let currentFile = useState<GistFile>("file-content", () => ({
         content: "# Hello, world!",
         filename: "example",
-        language: "english",
+        language: "English",
         raw_url: "",
         size: 0,
         truncated: false,
@@ -32,6 +33,13 @@ export const useContent = () => {
         if (targetFile) {
             currentFile.value = targetFile
         }
+    }
+
+    const setUser = (userTmp: SimpleUser | null) => {
+        user.value = userTmp
+    }
+    const getUser = () => {
+        return user.value;
     }
 
     //could cause problems with updating and reactivness
