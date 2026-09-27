@@ -3,7 +3,7 @@
     <Drawer v-model:visible="settings.drawerVisible">
       <template #header>
       </template>
-      <Listbox v-model="selected" :options="files" optionLabel="name" scrollHeight="auto" class="w-full">
+      <Listbox v-model="selected" :options="contentStore.files" optionLabel="name" scrollHeight="auto" class="w-full">
         <template #option="slotProps">
           <div class="flex items-center justify-between w-full gap-3">
             <div class="flex items-center gap-3 min-w-0">
@@ -20,16 +20,16 @@
   </div>
 </template>
 <script setup>
+import {useContentStore} from "~/store/content.ts";
 
 const settings = useAppSettings()
-const content = useContent()
+const contentStore = useContentStore()
 const selected = ref()
 watch(() => selected.value, () => {
-  console.log(selected.value.filename)
-  content.setCurrentFile(selected.value.filename)
+  contentStore.setCurrentFile(selected.value.filename)
+  console.log(contentStore.activeFileName)
+  console.log(contentStore.currentFile.filename)
+  console.log(contentStore.currentFile.content)
 })
-
-const files = ref(content.files)
-console.log(files.value)
 
 </script>

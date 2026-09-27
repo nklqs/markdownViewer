@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {useContentStore} from "~/store/content.ts";
 
-const content = useContent()
-const rawContents = content.currentFile
+const contentStore = useContentStore()
+const rawContents = contentStore.currentFile
 
 const settings = useAppSettings()
 </script>
@@ -125,10 +125,12 @@ const settings = useAppSettings()
     margin: 0;
     padding: 0;
   }
+
   .side-panel-enter-active,
   .side-panel-leave-active {
     max-width: 100%;
   }
+
   .side-panel-enter-from,
   .side-panel-leave-to {
     max-height: 0;

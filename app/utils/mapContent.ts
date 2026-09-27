@@ -1,6 +1,9 @@
+import {useContentStore} from "~/store/content.ts";
+import type {GistFile} from "~/interfaces/GetAGist.ts";
+
 export const mapContent = async () => {
     const settings = useAppSettings()
-    const content = useContent()
+    const content = useContentStore()
     let response: any
     try {
         response = await $fetch("/api/loadGist", {
@@ -10,17 +13,20 @@ export const mapContent = async () => {
     } catch {
         return false
     }
+    console.log(Object.values(response.files))
 
-    if (response.files) content.files.value = Object.values(response.files)
+    const unwrapped: GistFile[] = Object.values(response.files)
+    if (response.files) content.files.push(...unwrapped)
+    console.log(content.files)
     //if(response.owner) content.user.value = (toRaw(response.owner))
     //console.log(content.user.value)
 
 
-    if (content.returnAmountOfFiles() > 1) {
+    if (content.fileCount > 1) {
         settings.value.hasMultipleFiles = true
     }
 
-    const firstElement = content.files.value[0]
+    const firstElement = content.files[0]
 
     if (firstElement?.filename) content.setCurrentFile(firstElement?.filename)
 

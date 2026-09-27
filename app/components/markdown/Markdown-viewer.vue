@@ -1,40 +1,26 @@
 <script setup lang="ts">
 import breaks from 'comark/plugins/breaks'
 import jsonRender from '@comark/vue/plugins/json-render'
-
-
-const props = defineProps({
-  rawContent: {
-    type: String,
-    required: true
-  }
-})
+import {useContentStore} from "~/store/content.ts";
 
 const settings = useAppSettings()
+const contentStore = useContentStore()
 const dialog = useDialogs()
 let content = ref('')
 
-// Initial restart
-content.value = await customContentProcessor()
-
-watch(() => props.rawContent, async (newContent) => {
-  const length = newContent?.length || 0
-  if (length >= 2000  && !settings.value.largeContentDialogSet && !settings.value.onDemandRendering) {
+watch(() => contentStore.currentFile, async (newFile) => {
+  if (newFile.content.length >= 2000  && !settings.value.largeContentDialogSet && !settings.value.onDemandRendering) {
     dialog.openDialog('LARGE_CONTENT_WARNING')
     settings.value.largeContentDialogSet = true
   }
   if(!settings.value.onDemandRendering) {
-    content.value = await customContentProcessor()
+    content.value = await customContentProcessor(newFile.content)
   }
-})
+  console.log(contentStore.currentFile.filename)
+}, {deep: true, immediate: true})
 
-function setLiveRender(value: boolean) {
-  settings.value.onDemandRendering = value
-  dialog.closeDialog()
-}
-
-async function customContentProcessor() {
-  let rawContentPs = props.rawContent.valueOf()
+async function customContentProcessor(text: string) {
+  let rawContentPs = text
   rawContentPs = rawContentPs.replace(
       /(^|\s)#([\wÀ-ÿ]+)/g,
       '$1<span class="custom-tag">#$2</span>'
@@ -44,7 +30,7 @@ async function customContentProcessor() {
 }
 
 async function updateContent() {
-  content.value = await customContentProcessor()
+  content.value = await customContentProcessor(contentStore.currentFile.content)
 }
 
 </script>

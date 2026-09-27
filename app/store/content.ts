@@ -12,21 +12,19 @@ const exampleContent = "# Hello, World\n" +
     "---\n" +
     "\n" +
     "All *common* and **basic** Markdown syntax is supported, including Obsidian ==specific== syntax."
-
+const defaultFile: GistFile = {
+    filename: 'example',
+    language: "English",
+    content: exampleContent,
+    raw_url: '',
+    size: 0,
+    truncated: false
+}
 export const useContentStore = defineStore('content', () => {
     //1. State
-    const files = ref<GistFile[]>([])
+    const files = ref<GistFile[]>([defaultFile])
     const user = ref<SimpleUser | null>(null)
     const activeFileName = ref<string | null>('example')
-
-    const defaultFile: GistFile = {
-        filename: 'example',
-        language: "English",
-        content: exampleContent,
-        raw_url: '',
-        size: 0,
-        truncated: false
-    }
     //2.Getters
     const currentFile = computed<GistFile>(() => {
         const found = files.value.find(file => file.filename === activeFileName.value)
