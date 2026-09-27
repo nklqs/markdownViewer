@@ -12,7 +12,8 @@ export const mapContent = async () => {
     }
 
     if (response.files) content.files.value = Object.values(response.files)
-    if(response.owner) content.setUser = response.owner
+    //if(response.owner) content.user.value = (toRaw(response.owner))
+    //console.log(content.user.value)
 
 
     if (content.returnAmountOfFiles() > 1) {

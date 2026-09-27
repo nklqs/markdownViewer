@@ -8,7 +8,7 @@ import Bars from '@primeicons/vue/bars';
 const settings = useAppSettings()
 const dialogs = useDialogs()
 const menu = ref();
-let items = ref()
+let items: Ref
 items = ref([
   {
     label: 'Settings',
@@ -57,14 +57,15 @@ const toggleDrawer = () => {
 <template>
   <div class="header-content">
     <div class="header-logo">
-      <NuxtImg src="/logo.png" class="responsive" style="max-height: 3rem; width: auto; object-fit: contain"/>
+      <h2>Markdown Viewer</h2>
     </div>
     <div class="header-menu">
+      <Menu ref="menu" :model="items" popup class="w-40"/>
+      <Button class="loading-button" type="button" severity="secondary" variant="outlined" @click="loadGist()">Load Github Gist</Button>
+      <Button type="button" severity="secondary" variant="outlined" @click="toggle">Settings</Button>
       <Button @click="toggleDrawer()" iconOnly>
         <Bars/>
       </Button>
-      <Menu ref="menu" :model="items" popup class="w-40"/>
-      <Button type="button" severity="secondary" variant="outlined" @click="toggle">Settings</Button>
     </div>
   </div>
 </template>
@@ -81,5 +82,24 @@ const toggleDrawer = () => {
   height: auto; /* Removes fixed 3rem constraint to fit wrapped lines */
   box-sizing: border-box;
   margin-bottom: 0.5rem;
+}
+.header-logo{
+  display: flex;
+  align-items: center;
+}
+.header-menu, button {
+  display: flex;
+  margin-left: 1rem;
+  height: 100%;
+}
+h2 {
+  margin: 0;
+}
+@media screen and (max-width: 650px) {
+  .loading-button {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
 }
 </style>

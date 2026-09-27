@@ -19,7 +19,7 @@ content.value = await customContentProcessor()
 
 watch(() => props.rawContent, async (newContent) => {
   const length = newContent?.length || 0
-  if (length >= 20  && !settings.value.largeContentDialogSet && !settings.value.onDemandRendering) {
+  if (length >= 2000  && !settings.value.largeContentDialogSet && !settings.value.onDemandRendering) {
     dialog.openDialog('LARGE_CONTENT_WARNING')
     settings.value.largeContentDialogSet = true
   }
@@ -51,7 +51,7 @@ async function updateContent() {
 
 <template>
     <div class="markdown-content-container">
-      <Button v-if="settings.onDemandRendering" @click="updateContent()">Refresh</Button>
+      <Button class="refresh" v-if="settings.onDemandRendering" @click="updateContent()">Refresh</Button>
       <Suspense>
         <Markdown :plugins="[breaks(), jsonRender()]" style="width: 100%">{{ content }}</Markdown>
       </Suspense>
@@ -74,7 +74,10 @@ async function updateContent() {
   scroll-behavior: smooth;
   transition: transform 1s;
 }
-
+.refresh {
+  height: 2rem;
+  flex-shrink: 0;
+}
 
 :deep(table) { /* Penetrate child items deep() */
   border-collapse: collapse;

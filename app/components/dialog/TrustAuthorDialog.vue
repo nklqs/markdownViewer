@@ -25,7 +25,7 @@ const visible = computed({
       <Label></Label>
     </div>
     <template #footer>
-      <Button severity="secondary" variant="outlined">
+      <Button severity="primary" variant="outlined">
         Accept
       </Button>
     </template>

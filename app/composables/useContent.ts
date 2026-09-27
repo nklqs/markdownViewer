@@ -35,12 +35,6 @@ export const useContent = () => {
         }
     }
 
-    const setUser = (userTmp: SimpleUser | null) => {
-        user.value = userTmp
-    }
-    const getUser = () => {
-        return user.value;
-    }
 
     //could cause problems with updating and reactivness
     const updateContent = (newContent: string) => {

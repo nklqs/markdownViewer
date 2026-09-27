@@ -103,13 +103,14 @@ const settings = useAppSettings()
 @media screen and (max-width: 650px) {
   .markdown-container {
     flex-direction: column;
-    padding: 1rem 0.2rem;
+    padding: 0.4rem 0.2rem;
     margin: 0.2rem;
   }
 
   .markdown-editor {
     border-radius: 0.5rem;
     min-height: 50%;
+    margin: 0;
   }
 
   .markdown-viewer {
