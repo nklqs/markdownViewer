@@ -2,10 +2,23 @@
 import {useContentStore} from "~/store/content.ts";
 
 const contentStore = useContentStore()
+const element = ref<string>()
+
+function refresh() {
+  element.value = contentStore.currentFile.content
+}
+
+function save() {
+  if (element.value) contentStore.currentFile.content = element.value
+}
 </script>
 
 <template>
-    <Textarea v-model="contentStore.currentFile.content" autoresize rows="20"/>
+  <div>
+    <Button @click="refresh()">refresh</Button>
+    <Button @click="save()">save</Button>
+    <Textarea v-model="element" autoresize rows="20"/>
+  </div>
 </template>
 
 <style scoped>
