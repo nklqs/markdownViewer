@@ -27,6 +27,11 @@ items = ref([
         label: 'On Demand Rendering', icon: WavePulse, disabled: settings.value.disableControls, command: () => {
           toggleOnDemandRendering();
         }
+      },
+      {
+        label: 'Dark mode', icon: WavePulse, command: () => {
+          toggleDarkMode();
+        }
       }
     ]
   }
@@ -51,7 +56,9 @@ function toggleOnDemandRendering() {
 const toggleDrawer = () => {
   settings.value.drawerVisible = !settings.value.drawerVisible;
 }
-
+const toggleDarkMode = () => {
+  document.documentElement.classList.toggle('my-app-dark');
+}
 </script>
 
 <template>

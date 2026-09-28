@@ -34,7 +34,7 @@ const settings = useAppSettings()
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 3px solid #1d04ac;
+  border: 3px solid var(--p-purple-600);
   padding: 0.5rem 0;
   margin: 0 1rem 0 1rem;
   height: calc(100vh - 7rem);
@@ -49,7 +49,7 @@ const settings = useAppSettings()
   overflow-y: auto;
   min-width: 0;
   border-radius: 1rem;
-  border: 3px solid #1d04ac;
+  border: 3px solid var(--p-purple-600);
   margin: 0.5rem;
 }
 
@@ -60,7 +60,7 @@ const settings = useAppSettings()
   height: 100%;
   min-width: 0;
   border-radius: 1rem;
-  border: 3px solid #1d04ac;
+  border: 3px solid var(--p-purple-600);
   margin: 0.5rem;
   transition: all 0.4s ease-in-out;
 }
@@ -69,9 +69,12 @@ const settings = useAppSettings()
   display: flex;
   width: 100%;
   height: 30%;
-  background-color: #eae6ff;
   border-radius: 1rem;
 
+}
+
+.markdown-viewer-toc {
+  background-color: var(--p-purple-400);
 }
 
 .markdown-viewer-viewer {

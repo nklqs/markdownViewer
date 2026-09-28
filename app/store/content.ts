@@ -28,7 +28,7 @@ export const useContentStore = defineStore('content', () => {
     //2.Getters
     const currentFile = computed<GistFile>(() => {
         const found = files.value.find(file => file.filename === activeFileName.value)
-        return found || defaultFile
+        return found || files.value[0] || defaultFile
     })
 
     const fileCount = computed(() => files.value.length)
@@ -41,13 +41,28 @@ export const useContentStore = defineStore('content', () => {
         activeFileName.value = filename
     }
 
-    function updateContent(newContent: string) {
+    function updateCurrentContent(newContent: string) {
         const file = files.value.find((file) => file.filename === activeFileName.value)
         if(file) {
             file.content = newContent
-        } else {
-            defaultFile.content = newContent
         }
+    }
+
+    function addFile() {
+        const tmpFileName = new Date().toDateString();
+        const defaultFile: GistFile = {
+            filename: tmpFileName,
+            language: "English",
+            content: exampleContent,
+            raw_url: '',
+            size: 0,
+            truncated: false
+        }
+        files.value.push(defaultFile)
+        setCurrentFile(tmpFileName)
+    }
+    function setFileTitle(filename : string) {
+        currentFile.value.filename = filename
     }
 
     return {
@@ -60,6 +75,8 @@ export const useContentStore = defineStore('content', () => {
         //Actions
         setFiles,
         setCurrentFile,
-        updateContent
+        updateCurrentContent,
+        addFile,
+        setFileTitle,
     }
 })

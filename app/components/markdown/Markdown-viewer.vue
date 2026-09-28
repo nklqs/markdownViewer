@@ -71,13 +71,13 @@ async function updateContent() {
 }
 
 :deep(th), :deep(td) {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--p-purple-200);
   padding: 8px 12px;
   text-align: left;
 }
 
 :deep(th) {
-  background-color: #f9fafb;
+  background-color: var(--p-purple-200);
   font-weight: 600;
 }
 
@@ -87,20 +87,21 @@ async function updateContent() {
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 15px;
-  border-left: 3px solid #8436f4;
-  background-color: #e7ccff;
+  border-left: 3px solid var(--p-purple-500);
+  background-color: var(--p-purple-300);
 }
 :deep(pre) {
-  background-color: #dcdcdc;
+  background-color: var(--p-purple-200);
+  color: black;
   border-radius: 3px;
   padding: 2px 4px;
 }
 :deep(.custom-tag) {
-  background-color: #d9d1ff;
-  color: #6c22da;
+  background-color: var(--p-purple-500);
+  color: var(--p-purple-500);
   border-radius: 1rem;
   padding: 0 3px;
-  border: #6c22da solid 1px;
+  border: var(--p-purple-500) solid 1px;
 }
 
 @media screen and (max-width: 650px) {

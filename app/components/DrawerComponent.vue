@@ -13,7 +13,7 @@
           </div>
         </template>
       </Listbox>
-      <Button variant="outlined" @click="">New file</Button>
+      <Button variant="outlined" @click="addFile()">New file</Button>
       <template #footer>
       </template>
     </Drawer>
@@ -31,5 +31,9 @@ watch(() => selected.value, () => {
   console.log(contentStore.currentFile.filename)
   console.log(contentStore.currentFile.content)
 })
+
+const addFile = () => {
+  contentStore.addFile()
+}
 
 </script>
